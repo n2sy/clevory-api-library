@@ -1,11 +1,12 @@
 const express = require("express");
+const bookController = require("../controllers/book.controller");
 
 const router = express.Router();
 
-router.get("/all", f1);
-router.get("/:id", f1);
-router.post("/add", f1);
-router.put("/edit/:id", f1);
-router.delete("/delete/:id", f1);
+// router.get("/all", f1);
+// router.get("/:id", f1);
+router.post("/add", bookController.createBook);
+// router.put("/edit/:id", f1);
+// router.delete("/delete/:id", f1);
 
 module.exports = router;

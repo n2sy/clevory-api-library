@@ -51,3 +51,36 @@ exports.deleteBook = async (req, res) => {
     res.status(400).json({ messsage: err.messsage });
   }
 };
+
+exports.updateBook = async (req, res) => {
+  try {
+    let reponse = await Book.findByIdAndUpdate(req.params.id, req.body, {
+      new: false,
+    });
+    if (!reponse) {
+      res.status(404).json({
+        message: "Book not found !",
+      });
+    }
+    res.json({ message: `Book "${reponse.title}" updated` });
+  } catch (err) {
+    res.status(400).json({ messsage: err.messsage });
+  }
+};
+
+exports.restoreBook = async (req, res) => {
+  try {
+    let b = await Book.findById(req.params.id).deleted();
+    if (!b) {
+      res.status(404).json({
+        message: "Book not found !",
+      });
+    }
+    b.isDeleted = false;
+    b.deleteAt = null;
+    b.save();
+    res.json({ message: "Book successfully restored !" });
+  } catch (err) {
+    res.status(400).json({ messsage: err.messsage });
+  }
+};

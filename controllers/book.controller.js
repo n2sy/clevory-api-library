@@ -2,10 +2,24 @@ const Book = require("../models/book.model");
 
 exports.getAllBooks = async (req, res) => {
   try {
-    let response = await Book.find();
+    let response = await Book.find().notDeleted();
     res.json({ listeLivres: response });
   } catch (err) {
     res.status(400).json({ messsage: err.messsage });
+  }
+};
+
+exports.getBookById = async (req, res) => {
+  try {
+    let response = await Book.findById(req.params.id);
+    if (!response) {
+      res.status(404).json({
+        message: "Book not found !",
+      });
+    }
+    res.json(response);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 };
 

@@ -35,4 +35,12 @@ const BookSchema = new mongoose.Schema(
   }
 );
 
+BookSchema.query.notDeleted = function () {
+  return this.where({ isDeleted: false });
+};
+
+BookSchema.query.deleted = function () {
+  return this.where({ isDeleted: true });
+};
+
 module.exports = mongoose.model("Book", BookSchema);

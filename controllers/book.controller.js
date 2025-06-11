@@ -34,3 +34,20 @@ exports.createBook = async (req, res) => {
     res.status(400).json({ messsage: err.messsage });
   }
 };
+
+exports.deleteBook = async (req, res) => {
+  try {
+    let b = await Book.findById(req.params.id).notDeleted();
+    if (!b) {
+      res.status(404).json({
+        message: "Book not found !",
+      });
+    }
+    b.isDeleted = true;
+    b.deleteAt = new Date();
+    b.save();
+    res.json({ message: "Book successfully deleted !" });
+  } catch (err) {
+    res.status(400).json({ messsage: err.messsage });
+  }
+};

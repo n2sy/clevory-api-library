@@ -1,9 +1,10 @@
 const mongoose = require("mongoose");
+require("dotenv").config();
 
 const connectDB = async () => {
   try {
     const conn = await mongoose.connect(
-      `mongodb+srv://nidhal:azerty@cvproject.cpsst.mongodb.net/libraryDB`
+      `mongodb+srv://${process.env.USERNAME}:${process.env.PASSWORD}@${process.env.PROJECT}.cpsst.mongodb.net/${process.env.DB_NAME}`
     );
     console.log("MongoDB Connected");
     return conn;

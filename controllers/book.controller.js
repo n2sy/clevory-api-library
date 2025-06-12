@@ -1,8 +1,13 @@
 const Book = require("../models/book.model");
 
 exports.getAllBooks = async (req, res) => {
+  let filter = req.query.by;
+  console.log(filter);
+
   try {
-    let response = await Book.find().notDeleted();
+    let response = await Book.find({
+      title: new RegExp(filter, "i"),
+    }).notDeleted();
     res.json({ listeLivres: response });
   } catch (err) {
     res.status(400).json({ messsage: err.messsage });

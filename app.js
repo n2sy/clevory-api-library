@@ -8,6 +8,10 @@ app.use(express.json());
 app.use("/books", bookRoutes);
 app.use("/auth", userRoutes);
 
+app.use((error, req, res, next) => {
+  res.status(500).json({ message: error.message });
+});
+
 const startServer = async () => {
   try {
     await connectDB();

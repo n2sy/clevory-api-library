@@ -2,7 +2,6 @@ const Book = require("../models/book.model");
 
 exports.getAllBooks = async (req, res) => {
   let filter = req.query.by;
-  console.log(filter);
 
   try {
     let response = await Book.find({

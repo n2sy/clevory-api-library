@@ -33,12 +33,12 @@ exports.loginHandler = async (req, res) => {
 
   let u = await User.findOne({ email: email });
   if (!u) {
-    res.statut(404).json({ message: "Invalid login" });
+    res.status(404).json({ message: "Invalid login" });
   }
 
   let pwdMatching = await bcrypt.compare(password, u.password);
   if (!pwdMatching) {
-    res.statut(401).json({ message: "Invalid Password" });
+    res.status(401).json({ message: "Invalid Password" });
   }
 
   const generatedToken = jwt.sign(

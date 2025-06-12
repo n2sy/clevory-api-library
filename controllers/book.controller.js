@@ -84,3 +84,19 @@ exports.restoreBook = async (req, res) => {
     res.status(400).json({ messsage: err.messsage });
   }
 };
+
+exports.searchBooks = async (req, res) => {
+  let year1 = req.query.year1;
+  let year2 = req.query.year2;
+  try {
+    let response = await Book.find({
+      year: {
+        $gte: year1,
+        $lte: year2,
+      },
+    }).notDeleted();
+    res.json({ listeLivres: response });
+  } catch (err) {
+    res.status(400).json({ messsage: err.messsage });
+  }
+};

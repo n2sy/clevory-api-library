@@ -1,12 +1,13 @@
 const express = require("express");
 const connectDB = require("./config/db");
 const bookRoutes = require("./routes/book.routes");
+const avatarRoutes = require("./routes/avatar.routes");
 const userRoutes = require("./routes/user.routes");
 
 const app = express();
 app.use(express.json());
 app.use("/avatars", express.static("images"));
-app.use("/images/upload", bookRoutes);
+app.use("/images/upload", avatarRoutes);
 app.use("/books", bookRoutes);
 app.use("/auth", userRoutes);
 

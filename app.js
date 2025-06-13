@@ -5,6 +5,8 @@ const userRoutes = require("./routes/user.routes");
 
 const app = express();
 app.use(express.json());
+app.use("/avatars", express.static("images"));
+app.use("/images/upload", bookRoutes);
 app.use("/books", bookRoutes);
 app.use("/auth", userRoutes);
 

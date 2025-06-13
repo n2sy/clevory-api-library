@@ -42,7 +42,8 @@ exports.loginHandler = async (req, res) => {
   }
 
   const generatedToken = jwt.sign(
-    { name: u.name, role: u.role, id: u._id },
+    // { name: u.name, role: u.role, id: u._id },
+    { id: u._id },
     process.env.SECRET_KEY,
     {
       expiresIn: "1h",

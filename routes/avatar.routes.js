@@ -14,6 +14,8 @@ let upload = multer.diskStorage({
   destination: (req, file, callback) => {
     const isValid = MIME_TYPE_OBJ[file.mimetype];
     let err = null;
+    console.log("zzzzzzzzzzzz");
+
     if (!isValid) {
       err = new Error("Format Invalid");
     }

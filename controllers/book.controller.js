@@ -28,7 +28,12 @@ exports.getBookById = async (req, res) => {
 };
 
 exports.createBook = async (req, res) => {
+    
   let newBook = new Book(req.body);
+  if (req.body.avatar) {
+    let urlAvatar = req.protocol + "://" + req.get("host");
+    newBook.avatar = urlAvatar + "/avatars/" + req.body.avatar;
+  }
   try {
     let response = await newBook.save();
     res

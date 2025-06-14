@@ -1,11 +1,14 @@
 const express = require("express");
+const cors = require("cors");
 const connectDB = require("./config/db");
 const bookRoutes = require("./routes/book.routes");
 const avatarRoutes = require("./routes/avatar.routes");
 const userRoutes = require("./routes/user.routes");
 
 const app = express();
+app.use(cors());
 app.use(express.json());
+
 app.use("/avatars", express.static("images"));
 app.use("/images/upload", avatarRoutes);
 app.use("/books", bookRoutes);

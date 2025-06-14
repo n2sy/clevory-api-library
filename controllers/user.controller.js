@@ -52,6 +52,7 @@ exports.loginHandler = async (req, res) => {
 
   res.status(200).json({
     message: "User Logged",
+    role: u.role,
     token: generatedToken,
   });
 };

@@ -5,8 +5,8 @@ const role = require("../middlewares/role.middleware");
 
 const router = express.Router();
 
-router.get("/all", isAuth, role("admin"), bookController.getAllBooks);
-router.get("/search", isAuth, bookController.searchBooks);
+router.get("/all", bookController.getAllBooks);
+router.get("/search", bookController.searchBooks);
 router.get("/:id", isAuth, bookController.getBookById);
 router.post("/add", isAuth, role("admin"), bookController.createBook);
 router.put("/edit/:id", isAuth, role("admin"), bookController.updateBook);
